@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Endpoint in Config</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        label, textarea, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Update Configuration File</h2>
+
+    <!-- Text area to paste the old configuration -->
+    <label for="oldConfig">Paste your old configuration:</label>
+    <textarea id="oldConfig" placeholder="Paste your config here"></textarea>
+
+    <!-- Button to update the configuration -->
+    <button onclick="updateConfig()">Update Configuration</button>
+
+    <!-- Display the updated configuration -->
+    <h3>Updated Configuration:</h3>
+    <pre id="updatedConfig"></pre>
+
+    <script>
+        // Pre-filled endpoint stored as a variable
+        const newEndpoint = '203.0.113.1:51820';  // <-- You can modify this endpoint
+
+        function updateConfig() {
+            // Get the old configuration from the textarea
+            const oldConfig = document.getElementById('oldConfig').value;
+
+            if (!oldConfig) {
+                alert('Please paste your old configuration.');
+                return;
+            }
+
+            // Find and replace the existing endpoint with the pre-filled one
+            const endpointRegex = /(Endpoint\s*=\s*)([^\s]+)/;
+            const updatedConfig = oldConfig.replace(endpointRegex, `$1${newEndpoint}`);
+
+            // Display the updated configuration in the pre tag
+            document.getElementById('updatedConfig').textContent = updatedConfig;
+        }
+    </script>
+
+</body>
+</html>
