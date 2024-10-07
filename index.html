@@ -22,6 +22,19 @@
             padding: 10px;
             border: 1px solid #ddd;
         }
+        .copy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -38,6 +51,8 @@
     <!-- Display the updated configuration -->
     <h3>Updated Configuration:</h3>
     <pre id="updatedConfig"></pre>
+    <!-- Copy Button -->
+    <button class="copy-btn" onclick="copyToClipboard()">Copy Configuration</button>
 
     <script>
         // Pre-filled endpoint stored as a variable
@@ -58,6 +73,26 @@
 
             // Display the updated configuration in the pre tag
             document.getElementById('updatedConfig').textContent = updatedConfig;
+        }
+
+        function copyToClipboard() {
+            // Get the updated configuration text
+            const updatedConfig = document.getElementById('updatedConfig').textContent;
+
+            // Create a temporary textarea to hold the text to copy
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = updatedConfig;
+            document.body.appendChild(tempTextarea);
+
+            // Select the text and copy it to the clipboard
+            tempTextarea.select();
+            document.execCommand('copy');
+
+            // Remove the temporary textarea from the DOM
+            document.body.removeChild(tempTextarea);
+
+            // Notify the user
+            alert('Configuration copied to clipboard!');
         }
     </script>
 
